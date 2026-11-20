@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>김성철 · Technical Program Manager — Gmarket Technology Portfolio</title>
+  <style>
+    /* ==========================================================================
+       1. CSS Custom Properties & Zero-Dependency Reset
+       ========================================================================== */
+    :root {
+      --gmarket-green: #00B837;
+      --gmarket-green-dark: #00942C;
+      --gmarket-green-soft: #E8F8ED;
+      --tech-blue: #0066FF;
+      --tech-blue-dark: #0052CC;
+      --tech-blue-soft: #EBF3FF;
+      --blueprint-bg: #0B1120;
+      --blueprint-card: #111827;
+      --blueprint-border: #1E293B;
+      --canvas-bg: #F8FAFC;
+      --surface-white: #FFFFFF;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --border-light: #E2E8F0;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --shadow-bento: 0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px -6px rgba(15, 23, 42, 0.05);
+      --shadow-hover: 0 12px 28px -6px rgba(0, 102, 255, 0.10), 0 4px 12px -2px rgba(0, 184, 55, 0.08);
+      --font-sans: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background-color: var(--canvas-bg);
+      background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+      background-size: 24px 24px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    /* ==========================================================================
+       2. Layout Containers & Sticky Top Navigation
+       ========================================================================== */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .top-nav-wrap {
+      position: sticky;
+      top: 14px;
+      z-index: 100;
+      padding: 0 20px;
+    }
+
+    .top-nav {
+      max-width: 1140px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background-color: var(--gmarket-green);
+      box-shadow: 0 0 0 3px var(--gmarket-green-soft);
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--tech-blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline {
+      background: var(--surface-white);
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+    }
+
+    .btn-outline:hover {
+      background: #F1F5F9;
+      border-color: #CBD5E1;
+    }
+
+    .btn-primary {
+      background: var(--gmarket-green);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: var(--gmarket-green-dark);
+    }
+
+    /* ==========================================================================
+       3. Main Sections & Typography
+       ========================================================================== */
+    main {
+      padding-top: 32px;
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 72px;
+    }
+
+    section {
+      scroll-margin-top: 90px;
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gmarket-green-dark);
+      margin-bottom: 6px;
+    }
+
+    .section-eyebrow.blue {
+      color: var(--tech-blue);
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      line-height: 1.25;
+    }
+
+    .section-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      max-width: 720px;
+    }
+
+    /* ==========================================================================
+       4. Hero & Bento KPI Grid
+       ========================================================================== */
+    .hero-card {
+      background: var(--surface-white);
+      border: 1px solid var(--border-light);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--shadow-bento);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--gmarket-green) 0%, #10B981 50%, var(--tech-blue) 100%);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #F1F5F9;
+      border: 1px solid var(--border-light);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .hero-headline {
+      font-size: 2.35rem;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.22;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .hero-highlight {
+      color: var(--tech-blue);
+      background: linear-gradient(120deg, var(--gmarket-green-soft) 0%, var(--tech-blue-soft) 100%);
+      padding: 0 8px;
+      border-radius: 8px;
+    }
+
+    .hero-subcopy {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      padding-left: 14px;
+      border-left: 3px solid var(--gmarket-green);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .kpi-card {
+      background: var(--canvas-bg);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .kpi-card:hover {
+      background: var(--surface-white);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .kpi-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .kpi-dot-green {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gmarket-green);
+    }
+
+    .kpi-dot-blue {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--tech-blue);
+    }
+
+    .kpi-value {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      line-height: 1.15;
+    }
+
+    .kpi-sub {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       5. Section 01: Dark Blueprint Architecture Showcase
+       ========================================================================== */
+    .tab-group {
+      display: inline-flex;
+      background: var(--surface-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 5px;
+      gap: 4px;
+    }
+
+    .tab-btn {
+      padding: 9px 16px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--blueprint-bg);
+      color: #FFFFFF;
+    }
+
+    .blueprint-box {
+      background-color: var(--blueprint-bg);
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+      color: #F8FAFC;
+      border: 1px solid var(--blueprint-border);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 16px 36px -8px rgba(11, 17, 32, 0.28);
+    }
+
+    .blueprint-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--blueprint-border);
+    }
+
+    .blueprint-head h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .blueprint-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+      background: rgba(0, 184, 55, 0.16);
+      color: #4ADE80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+
+    .arch-flow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .arch-node {
+      background: var(--blueprint-card);
+      border: 1px solid #263348;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .arch-node.bridge {
+      border: 2px solid var(--gmarket-green);
+      background: linear-gradient(180deg, #111D2E 0%, #0F172A 100%);
+    }
+
+    .node-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #60A5FA;
+      margin-bottom: 8px;
+    }
+
+    .arch-node.bridge .node-kicker {
+      color: #4ADE80;
+    }
+
+    .arch-node h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+    }
+
+    .arch-node p {
+      font-size: 0.82rem;
+      color: #94A3B8;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .bridge-pills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .bridge-pill {
+      background: #1E293B;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 0.78rem;
+      color: #E2E8F0;
+      font-weight: 600;
+    }
+
+    .bridge-pill span {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: #4ADE80;
+      margin-bottom: 2px;
+    }
+
+    .node-meta {
+      border-top: 1px solid #1E293B;
+      padding-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #CBD5E1;
+    }
+
+    .outcome-banner {
+      margin-top: 22px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      background: rgba(0, 102, 255, 0.14);
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #E0F2FE;
+    }
+
+    .outcome-banner strong {
+      color: #4ADE80;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       6. Section 02: Filterable Bento Program Grid
+       ========================================================================== */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--surface-white);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-light);
+      transition: all 0.2s ease;
+    }
+
+    .filter-pill.active {
+      background: var(--blueprint-bg);
+      color: #FFFFFF;
+      border-color: var(--blueprint-bg);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--surface-white);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: var(--shadow-bento);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+
+    .project-card:hover {
+      box-shadow: var(--shadow-hover);
+      border-color: #CBD5E1;
+    }
+
+    .project-card.full-span {
+      grid-column: 1 / -1;
+    }
+
+    .project-meta-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .badge-green {
+      background: var(--gmarket-green-soft);
+      color: var(--gmarket-green-dark);
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .badge-blue {
+      background: var(--tech-blue-soft);
+      color: var(--tech-blue-dark);
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .badge-gray {
+      background: #F1F5F9;
+      color: var(--text-secondary);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .project-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .bullet-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .bullet-list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gmarket-green);
+      font-weight: 800;
+    }
+
+    .bullet-list li strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .project-footer {
+      padding-top: 14px;
+      border-top: 1px solid #F1F5F9;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .outcome-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       7. Section 03: 3-Column Domain Synergy Bento
+       ========================================================================== */
+    .synergy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .synergy-card {
+      background: var(--surface-white);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: var(--shadow-bento);
+    }
+
+    .synergy-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .synergy-num.green {
+      background: var(--gmarket-green-soft);
+      color: var(--gmarket-green-dark);
+    }
+
+    .synergy-num.blue {
+      background: var(--tech-blue-soft);
+      color: var(--tech-blue);
+    }
+
+    .synergy-num.dark {
+      background: var(--blueprint-bg);
+      color: #FFFFFF;
+    }
+
+    .synergy-card h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .synergy-card p {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       8. Section 04: Condensed TPM Execution Playbook (High Scannability)
+       ========================================================================== */
+    .playbook-shell {
+      background: var(--blueprint-bg);
+      color: #F8FAFC;
+      border: 1px solid var(--blueprint-border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 16px 36px -8px rgba(11, 17, 32, 0.25);
+    }
+
+    .playbook-header {
+      background: #0F172A;
+      border-bottom: 1px solid var(--blueprint-border);
+      padding: 14px 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .window-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .window-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .pb-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pb-tab {
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: #1E293B;
+      color: #CBD5E1;
+      transition: all 0.2s ease;
+    }
+
+    .pb-tab.active {
+      background: var(--gmarket-green);
+      color: #FFFFFF;
+    }
+
+    .playbook-body {
+      padding: 28px;
+    }
+
+    .pb-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .pb-title-row h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .pb-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .pb-step-card {
+      background: var(--blueprint-card);
+      border: 1px solid #263348;
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .pb-step-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #4ADE80;
+      background: rgba(0, 184, 55, 0.14);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .pb-step-card h4 {
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .pb-keywords {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .pb-keywords li {
+      font-size: 0.82rem;
+      color: #CBD5E1;
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.45;
+    }
+
+    .pb-keywords li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #60A5FA;
+      font-weight: 800;
+    }
+
+    /* ==========================================================================
+       9. Section 05: Education, Growth & Compact Career Strip
+       ========================================================================== */
+    .bg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .info-card {
+      background: var(--surface-white);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: var(--shadow-bento);
+    }
+
+    .info-card h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .edu-item {
+      padding-bottom: 14px;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .edu-item:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .edu-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      font-weight: 800;
+      font-size: 0.94rem;
+      color: var(--text-primary);
+    }
+
+    .edu-period {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--tech-blue);
+    }
+
+    .edu-sub {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .highest-tag {
+      display: inline-block;
+      background: var(--tech-blue-soft);
+      color: var(--tech-blue);
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 5px;
+      margin-left: 6px;
+    }
+
+    .growth-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .growth-item {
+      background: var(--canvas-bg);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+    }
+
+    .growth-item strong {
+      display: block;
+      color: var(--text-primary);
+      font-size: 0.88rem;
+      margin-bottom: 2px;
+    }
+
+    .career-strip {
+      background: var(--surface-white);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      padding: 22px 26px;
+      box-shadow: var(--shadow-bento);
+    }
+
+    .career-strip-title {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 14px;
+    }
+
+    .career-timeline-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .career-step {
+      background: var(--canvas-bg);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 12px;
+      border-top: 3px solid var(--tech-blue);
+    }
+
+    .career-step.current {
+      border-top-color: var(--gmarket-green);
+      background: var(--gmarket-green-soft);
+    }
+
+    .career-step .c-date {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .career-step .c-company {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .career-step .c-role {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       10. Footer & Toast Feedback
+       ========================================================================== */
+    footer {
+      background: var(--blueprint-bg);
+      color: #F8FAFC;
+      border-top: 1px solid var(--blueprint-border);
+      padding: 44px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .footer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.86rem;
+      color: #CBD5E1;
+      margin-top: 6px;
+    }
+
+    .footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--blueprint-bg);
+      color: #FFFFFF;
+      border: 1px solid #334155;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      transition: all 0.25s ease;
+      z-index: 200;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       11. Responsive Breakpoints (Tablet & Mobile)
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .nav-links {
+        display: none;
+      }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .arch-flow-grid {
+        grid-template-columns: 1fr;
+      }
+      .projects-grid,
+      .synergy-grid,
+      .pb-steps-grid,
+      .bg-grid {
+        grid-template-columns: 1fr;
+      }
+      .career-timeline-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-card {
+        padding: 26px 20px;
+      }
+      .hero-headline {
+        font-size: 1.65rem;
+      }
+      .kpi-grid,
+      .bridge-pills,
+      .career-timeline-row {
+        grid-template-columns: 1fr;
+      }
+      .blueprint-box,
+      .playbook-body,
+      .project-card,
+      .info-card {
+        padding: 20px;
+      }
+    }
+
+    /* ==========================================================================
+       12. Executive Print / PDF Export Styles (@media print)
+       ========================================================================== */
+    @media print {
+      .no-print,
+      .top-nav-wrap,
+      .toast {
+        display: none !important;
+      }
+
+      body {
+        background: #FFFFFF !important;
+        background-image: none !important;
+        color: #0F172A !important;
+        font-size: 11pt;
+      }
+
+      main {
+        padding-top: 0;
+        padding-bottom: 0;
+        gap: 28px;
+      }
+
+      .hero-card,
+      .kpi-card,
+      .project-card,
+      .synergy-card,
+      .info-card,
+      .career-strip,
+      .blueprint-box,
+      .playbook-shell,
+      .arch-node,
+      .pb-step-card,
+      footer {
+        background: #FFFFFF !important;
+        background-image: none !important;
+        color: #0F172A !important;
+        border: 1px solid #CBD5E1 !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .blueprint-head h3,
+      .arch-node h4,
+      .playbook-header,
+      .pb-title-row h3,
+      .pb-step-card h4,
+      .footer-title {
+        color: #0F172A !important;
+        background: #F8FAFC !important;
+      }
+
+      .arch-node p,
+      .pb-keywords li,
+      .node-meta,
+      .footer-meta {
+        color: #334155 !important;
+      }
+
+      .bridge-pill {
+        background: #F8FAFC !important;
+        border: 1px solid #CBD5E1 !important;
+        color: #0F172A !important;
+      }
+
+      .outcome-banner {
+        background: #F1F5F9 !important;
+        border: 1px solid #94A3B8 !important;
+        color: #0F172A !important;
+      }
+
+      /* Show both architecture tabs and all playbook tabs when printing */
+      #arch-tab-p1,
+      #arch-tab-p2,
+      #pb-panel-1,
+      #pb-panel-2,
+      #pb-panel-3 {
+        display: block !important;
+        margin-bottom: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast no-print" role="status" aria-live="polite">
+    <span class="status-dot"></span>
+    <span id="toast-text">이메일 주소가 복사되었습니다.</span>
+  </div>
+
+  <!-- 1. Sticky Top Navigation -->
+  <div class="top-nav-wrap no-print">
+    <nav class="top-nav" aria-label="주요 메뉴">
+      <a href="#top" class="brand-title">
+        <span class="status-dot"></span>
+        <span>김성철 · Technical Program Manager</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#architecture">핵심역량</a>
+        <a href="#projects">주요실적</a>
+        <a href="#synergy">도메인시너지</a>
+        <a href="#playbook">실무Playbook</a>
+        <a href="#background">학력·자격</a>
+      </div>
+
+      <div class="nav-actions">
+        <button type="button" class="btn btn-outline" onclick="window.print()">PDF 인쇄 / 저장</button>
+        <a href="#contact" class="btn btn-primary">Contact</a>
+      </div>
+    </nav>
+  </div>
+
+  <main id="top" class="container">
+
+    <!-- 2. Hero & Bento KPI Grid -->
+    <section aria-label="핵심 요약">
+      <div class="hero-card">
+        <div class="hero-top-bar"></div>
+        <div class="hero-badge">Gmarket Technology Organization · Technical Program Manager (TPM)</div>
+
+        <h1 class="hero-headline">
+          단절된 백엔드(DB)와 프론트엔드, 그리고 다국적 조직 사이에<br />
+          <span class="hero-highlight">기술적 교차점</span>을 설계하는 TPM
+        </h1>
+
+        <p class="hero-subcopy">
+          총 260억 원+ 복합 플랫폼 구축·리플랫폼 리딩 &nbsp;|&nbsp; REST API 명세 설계·데이터 검증 기반 기술 병목 돌파 &nbsp;|&nbsp; 이커머스·한중 크로스보더 협업 역량
+        </p>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label"><span>01 · Program Scale</span><span class="kpi-dot-blue"></span></div>
+            <div class="kpi-value">260억 원+</div>
+            <div class="kpi-sub">총 리딩 플랫폼 사업 규모 (5개 핵심 프로그램)</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-label"><span>02 · Zero Defect</span><span class="kpi-dot-green"></span></div>
+            <div class="kpi-value">100%</div>
+            <div class="kpi-sub">무결점 론칭·준공률 (감리 지적 Zero)</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-label"><span>03 · Architecture</span><span class="kpi-dot-blue"></span></div>
+            <div class="kpi-value">30% 절감</div>
+            <div class="kpi-sub">조직 간 소통·배포 비용 (MSA 전환 &amp; CI/CD 구축)</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-label"><span>04 · Lead-Time</span><span class="kpi-dot-green"></span></div>
+            <div class="kpi-value">40% 단축</div>
+            <div class="kpi-sub">초기 기획·명세 리드타임 (용어집 표준화 &amp; GenAI)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Section 01: Signature Architecture — Tech Bridge & Re-platforming -->
+    <section id="architecture">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">01 · SIGNATURE ARCHITECTURE</div>
+          <h2 class="section-title">Tech Bridge &amp; MSA Re-platforming</h2>
+          <p class="section-desc">
+            LX 국토정보공사 디지털 트윈 1·2차 구축 사업(총 150억 원)에서 기술 단절을 돌파하고 아키텍처 전환을 완수한 핵심 실행 구조입니다.
+          </p>
+        </div>
+
+        <div class="tab-group no-print" role="tablist">
+          <button type="button" id="btn-arch-p1" class="tab-btn active" onclick="switchArch('p1')">Phase 1 — Tech Bridge</button>
+          <button type="button" id="btn-arch-p2" class="tab-btn" onclick="switchArch('p2')">Phase 2 — MSA &amp; CI/CD</button>
+        </div>
+      </div>
+
+      <!-- Tab 1: Phase 1 — Tech Bridge -->
+      <div id="arch-tab-p1" class="blueprint-box">
+        <div class="blueprint-head">
+          <h3>Phase 1 — Tech Bridge (API &amp; Data Pipeline)</h3>
+          <span class="blueprint-tag">DATA &amp; INTERFACE ALIGNMENT</span>
+        </div>
+
+        <div class="arch-flow-grid">
+          <div class="arch-node">
+            <div>
+              <div class="node-kicker">LEFT NODE · BACKEND</div>
+              <h4>국내 백엔드(DB) · 기획 조직</h4>
+              <p>보안 환경 내 원천 공간·행정 데이터 보유. 프론트엔드 가시화 요구 스펙과 데이터 호출 맥락 불일치로 초기 연동 교착 발생.</p>
+            </div>
+            <div class="node-meta">PostGIS · RDBMS Schema · 데이터 정제</div>
+          </div>
+
+          <div class="arch-node bridge">
+            <div>
+              <div class="node-kicker">CENTER BRIDGE · TPM EXECUTION</div>
+              <h4>TPM Tech Bridge (직접 설계 및 검증)</h4>
+              <p>API 구조와 데이터 파이프라인을 독학해 양측 엔지니어링 조직이 대화할 수 있는 공통 인터페이스 표준을 직접 구축했습니다.</p>
+              <div class="bridge-pills">
+                <div class="bridge-pill"><span>01 · SPEC</span>REST API Spec 직접 설계</div>
+                <div class="bridge-pill"><span>02 · QUERY</span>SQL 데이터 정합성 검증</div>
+                <div class="bridge-pill"><span>03 · TEST</span>Postman 페이로드 테스트</div>
+                <div class="bridge-pill"><span>04 · SCOPE</span>대안(Alternative) 기반 Scope 확정</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="arch-node">
+            <div>
+              <div class="node-kicker">RIGHT NODE · FRONTEND</div>
+              <h4>코어 3D 렌더링 개발 조직</h4>
+              <p>정량 비교 분석으로 채택한 오픈소스 Cesium 엔진 기반 고속 3D 시각화 구현. 3D Tiles·텍스처 경량화 기준으로 렌더링 성능 극대화.</p>
+            </div>
+            <div class="node-meta">CesiumJS · WebGL · 3D Tiles</div>
+          </div>
+        </div>
+
+        <div class="outcome-banner">
+          <strong>Key Outcome</strong>
+          <span>평행선 교착 상태 돌파 → 3D 파트 개발 PL 및 2차 사업 기획 총괄 승격</span>
+        </div>
+      </div>
+
+      <!-- Tab 2: Phase 2 — MSA & CI/CD Re-platforming -->
+      <div id="arch-tab-p2" class="blueprint-box hidden">
+        <div class="blueprint-head">
+          <h3>Phase 2 — MSA &amp; CI/CD Re-platforming</h3>
+          <span class="blueprint-tag">ZERO-DOWNTIME ARCHITECTURE</span>
+        </div>
+
+        <div class="arch-flow-grid">
+          <div class="arch-node">
+            <div>
+              <div class="node-kicker">AS-IS · BOTTLENECK</div>
+              <h4>기존 Monolithic 병목</h4>
+              <p>단일 기능 배포 시 전체 서비스 중단 리스크 및 4개 유관 조직(데이터·웹·3D·관리자) 간 코드 강결합으로 통합 배포 지연.</p>
+            </div>
+            <div class="node-meta">단일 장애점(SPOF) · 수동 배포 한계</div>
+          </div>
+
+          <div class="arch-node bridge">
+            <div>
+              <div class="node-kicker">TPM RE-PLATFORMING</div>
+              <h4>MSA 전환 &amp; 무중단 배포 파이프라인</h4>
+              <p>5개 지자체 확장에 맞춰 도메인 독립 배포 체계를 수립하고 유관 조직 간 기술 의존성을 표준 프로세스로 조율했습니다.</p>
+              <div class="bridge-pills">
+                <div class="bridge-pill"><span>01 · MSA</span>MSA &amp; Micro-Frontend 전환</div>
+                <div class="bridge-pill"><span>02 · CI/CD</span>Jenkins CI/CD 무중단 자동 배포</div>
+                <div class="bridge-pill"><span>03 · SYNC</span>4개 유관 조직 의존성 조율</div>
+                <div class="bridge-pill"><span>04 · QA</span>감리 대응 및 품질 게이트 운영</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="arch-node">
+            <div>
+              <div class="node-kicker">TO-BE · SCALE</div>
+              <h4>5개 지자체 무중단 확장 운영</h4>
+              <p>모듈별 독립 빌드·배포 환경 완비로 서비스 중단 리스크를 제거하고 안정적인 다중 지자체 플랫폼 운영 달성.</p>
+            </div>
+            <div class="node-meta">독립 배포 · 무중단 운영 · 2차 수주 연계</div>
+          </div>
+        </div>
+
+        <div class="outcome-banner">
+          <strong>Key Outcome</strong>
+          <span>의사소통 비용 30% 절감 · 감리 지적 Zero 무결점 론칭</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Section 02: Key Program Track Record -->
+    <section id="projects">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow blue">02 · KEY PROGRAM TRACK RECORD</div>
+          <h2 class="section-title">주요 프로그램 수행 실적</h2>
+          <p class="section-desc">
+            플랫폼 리플랫폼부터 글로벌 엔지니어링 조율, 이커머스 데이터 최적화까지 숫자로 검증된 5대 핵심 수행 이력입니다.
+          </p>
+        </div>
+
+        <div class="filter-bar no-print" role="group" aria-label="실적 필터">
+          <button type="button" class="filter-pill active" data-cat="all" onclick="filterProjects('all')">전체 (5)</button>
+          <button type="button" class="filter-pill" data-cat="platform" onclick="filterProjects('platform')">플랫폼 구축·전환</button>
+          <button type="button" class="filter-pill" data-cat="global" onclick="filterProjects('global')">글로벌·크로스보더</button>
+          <button type="button" class="filter-pill" data-cat="commerce" onclick="filterProjects('commerce')">커머스·BD</button>
+        </div>
+      </div>
+
+      <div class="projects-grid">
+        <!-- 1. LX 국토정보공사 -->
+        <article class="project-card" data-categories="platform global">
+          <div>
+            <div class="project-meta-top">
+              <div class="badge-group">
+                <span class="badge-green">150억 원 · 기여도 90~100%</span>
+                <span class="badge-gray">온품 · PM · 3D 파트 PL · 서비스기획팀장</span>
+              </div>
+            </div>
+            <h3>LX 국토정보공사 디지털 트윈 1·2차</h3>
+            <ul class="bullet-list">
+              <li><strong>API 명세 독학·설계 및 검증:</strong> 분리된 백엔드(DB)와 코어 렌더링 조직 간 REST API 명세 작성 및 SQL·Postman 정합성 검증</li>
+              <li><strong>엔진 선정 및 성능 최적화:</strong> 해외 레퍼런스·타 엔진 정량 비교로 오픈소스 Cesium 3D 엔진 채택 주도 및 3D Tiles 경량화</li>
+              <li><strong>MSA·CI/CD 리플랫폼:</strong> 2차 확장 시 MSA·마이크로 프론트엔드 및 Jenkins 무중단 배포 파이프라인 구축</li>
+            </ul>
+          </div>
+          <div class="project-footer">
+            <span class="outcome-label">IMPACT</span>
+            <div class="badge-group">
+              <span class="badge-blue">소통 비용 30% 절감</span>
+              <span class="badge-green">감리 지적 Zero 완수</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. 스마트 철도 & 베이징 도서관 -->
+        <article class="project-card" data-categories="global">
+          <div>
+            <div class="project-meta-top">
+              <div class="badge-group">
+                <span class="badge-blue">총 200억 원 (각 100억)</span>
+                <span class="badge-gray">파미정보기술 · 글로벌 사업 PL</span>
+              </div>
+            </div>
+            <h3>스마트 철도 &amp; 베이징 도서관 글로벌 과제</h3>
+            <ul class="bullet-list">
+              <li><strong>소통 채널 단일화:</strong> 한국 본사–글로벌 개발사–중국 파트너사 간 분산된 다국적 커뮤니케이션 창구 일원화</li>
+              <li><strong>이슈 및 액션 아이템 밀착 관리:</strong> 기술 병목 발생 시 즉시 의사결정 현황을 정돈하고 후속 이행 추적</li>
+              <li><strong>후속 사업 기획 확장:</strong> 스마트 오피스 DT·철도공단 ISMP·도로공사 디지털 트윈 아키텍처·기획안 작성</li>
+            </ul>
+          </div>
+          <div class="project-footer">
+            <span class="outcome-label">IMPACT</span>
+            <div class="badge-group">
+              <span class="badge-green">일정 지연 Zero</span>
+              <span class="badge-blue">200억 규모 무결점 준공</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. 수처리 공정 디지털 트윈 -->
+        <article class="project-card" data-categories="platform">
+          <div>
+            <div class="project-meta-top">
+              <div class="badge-group">
+                <span class="badge-green">16억 원 · 16인 조직 리딩</span>
+                <span class="badge-gray">(주)이안 · 총괄 PM</span>
+              </div>
+            </div>
+            <h3>수처리 공정 디지털 트윈 플랫폼 — (주)부강테크</h3>
+            <ul class="bullet-list">
+              <li><strong>도메인 용어집(Glossary) 표준화:</strong> 수처리 P&amp;ID 도면 직접 분석 및 현장 미팅으로 비즈니스–개발 조직 간 소통 기준 통일</li>
+              <li><strong>GenAI 기반 기획 자동화:</strong> 요구사항 명세서·UI 목업·QA 가이드 초안 표준화 (사내 GenAI 기획·제안 20건+ 병행)</li>
+              <li><strong>Scope 재정립 및 2차 연계:</strong> 개발진 1:1 스펙 조율 및 핵심 기능 중심 범위 확정으로 100% 정시 준공 달성</li>
+            </ul>
+          </div>
+          <div class="project-footer">
+            <span class="outcome-label">IMPACT</span>
+            <div class="badge-group">
+              <span class="badge-blue">리드타임 40% 단축</span>
+              <span class="badge-green">준공률 100% · 해외 진출 확보</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. 경기도 ITS 2차 -->
+        <article class="project-card" data-categories="platform global">
+          <div>
+            <div class="project-meta-top">
+              <div class="badge-group">
+                <span class="badge-blue">10억 원 · 기여도 80%</span>
+                <span class="badge-gray">파미정보기술 · 개발 PL</span>
+              </div>
+            </div>
+            <h3>경기도 ITS 2차 구축 사업</h3>
+            <ul class="bullet-list">
+              <li><strong>3D 시각화 아키텍처 설계:</strong> CesiumJS·WebGL·PostGIS 기반 지도 시각화 설계 및 다국적 개발 팀 연동 조율</li>
+              <li><strong>복합 데이터 API 융합 기획:</strong> 실시간 교통·DEM 지형 수치·기상 API를 결합한 경사도 재난 방지 알람 서비스 기획</li>
+              <li><strong>조기 리스크 에스컬레이션:</strong> 기술 실현 불확실성 선제 진단 및 CTO·총괄 PM 협의로 무결점 준공 완수</li>
+            </ul>
+          </div>
+          <div class="project-footer">
+            <span class="outcome-label">IMPACT</span>
+            <div class="badge-group">
+              <span class="badge-green">WEB 감리 무결점 준공</span>
+              <span class="badge-blue">국토교통부장관상 수상 기여</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. 크로스보더 이커머스 & 글로벌 M&A·IP -->
+        <article class="project-card full-span" data-categories="commerce global">
+          <div>
+            <div class="project-meta-top">
+              <div class="badge-group">
+                <span class="badge-green">베이징 현지 5년 6개월 근무</span>
+                <span class="badge-gray">IZP 그룹 &amp; (주)화텍파워 · 해외사업팀 과장</span>
+              </div>
+            </div>
+            <h3>크로스보더 이커머스 운영 및 글로벌 M&amp;A·IP 검토</h3>
+            <ul class="bullet-list">
+              <li><strong>IZP 그룹 (이커머스 플랫폼 운영·MD):</strong> 국내외 주요 이커머스 플랫폼 입점·점포 운영, 해외 소싱·MD, 타임딜·기획전 실행 및 <strong>전환율(CVR)·유입 데이터 기반 KPI 최적화</strong>와 정산 체계 운영</li>
+              <li><strong>(주)화텍파워 (글로벌 BD &amp; M&amp;A·IP):</strong> 중국 국유 유통 기업 베이징 수농그룹(首农集团) 신규 사업 파이프라인 구축, 이차전지·ESS·태양광 파트너십 및 <strong>미국 K2솔루션 인수 M&amp;A 법률·지재권(IP) 컴플라이언스 검토</strong></li>
+            </ul>
+          </div>
+          <div class="project-footer">
+            <span class="outcome-label">IMPACT</span>
+            <div class="badge-group">
+              <span class="badge-blue">CVR·KPI 데이터 기반 매출 최적화</span>
+              <span class="badge-green">글로벌 M&amp;A · IP 컴플라이언스 무결점</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 5. Section 03: Gmarket TPM Domain Synergy -->
+    <section id="synergy">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">03 · GMARKET TPM DOMAIN SYNERGY</div>
+          <h2 class="section-title">Gmarket Technology 조직과의 핵심 시너지</h2>
+          <p class="section-desc">
+            대규모 B2C 이커머스 트래픽과 글로벌 기술 협업이 교차하는 Gmarket TPM 포지션에 즉각 기여하는 3대 역량 축입니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="synergy-grid">
+        <div class="synergy-card">
+          <div class="synergy-num green">01</div>
+          <h3>B2C 커머스 퍼널 &amp; 데이터 감각</h3>
+          <p>
+            IZP 그룹 이커머스 플랫폼 운영·MD 및 <strong>전환율(CVR)·트래픽 데이터 분석</strong> 경험을 바탕으로 비즈니스 요구 이면의 구매 퍼널과 정산 구조를 정확히 이해하고 기술 우선순위를 정렬합니다.
+          </p>
+        </div>
+
+        <div class="synergy-card">
+          <div class="synergy-num blue">02</div>
+          <h3>한·중·영 크로스보더 엔지니어링 조율</h3>
+          <p>
+            <strong>HSK 6급(263점)</strong> 네이티브급 소통력과 중국 현지 5년 6개월 실무 감각으로 다국적 개발 조직 및 글로벌 파트너 간 기술·문화 병목을 단일 채널로 해소합니다.
+          </p>
+        </div>
+
+        <div class="synergy-card">
+          <div class="synergy-num dark">03</div>
+          <h3>법학(IP) · 경제학 · 공학의 입체적 리스크 통제</h3>
+          <p>
+            <strong>서울대 지재권법 석사 수료</strong> 및 해외 M&amp;A 계약 검토 역량으로 글로벌 파트너십 연동·외부 솔루션 도입·데이터 컴플라이언스 리스크를 선제 차단합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Section 04: TPM Execution Playbook (Condensed, High-Scannability Keywords) -->
+    <section id="playbook">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow blue">04 · TPM EXECUTION PLAYBOOK</div>
+          <h2 class="section-title">실무 TPM 거버넌스 프레임워크</h2>
+          <p class="section-desc">
+            유관 조직 간 의존성 병목과 요구사항 변경을 통제하기 위해 현장에서 검증한 3대 표준 실행 프로토콜입니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="playbook-shell">
+        <div class="playbook-header">
+          <div class="window-dots" aria-hidden="true">
+            <span style="background:#F43F5E;"></span>
+            <span style="background:#FBBF24;"></span>
+            <span style="background:#00B837;"></span>
+          </div>
+
+          <div class="pb-tabs no-print" role="tablist">
+            <button type="button" id="pb-btn-1" class="pb-tab active" onclick="switchPlaybook(1)">01 · API &amp; 데이터 정합성 검증</button>
+            <button type="button" id="pb-btn-2" class="pb-tab" onclick="switchPlaybook(2)">02 · Scope 통제 &amp; 대안 의사결정</button>
+            <button type="button" id="pb-btn-3" class="pb-tab" onclick="switchPlaybook(3)">03 · 의존성 &amp; 에스컬레이션</button>
+          </div>
+        </div>
+
+        <!-- Playbook Tab 1 -->
+        <div id="pb-panel-1" class="playbook-body">
+          <div class="pb-title-row">
+            <h3>API &amp; 데이터 정합성 검증 프로토콜</h3>
+            <span class="blueprint-tag">SQL + POSTMAN + CONTRACT-FIRST</span>
+          </div>
+          <div class="pb-steps-grid">
+            <div class="pb-step-card">
+              <span class="pb-step-badge">STEP 01 · DESIGN</span>
+              <h4>Contract-First 명세</h4>
+              <ul class="pb-keywords">
+                <li>Endpoint · Request/Response Schema 표준 정의</li>
+                <li>HTTP 상태 코드 및 Error Code 사전 합의</li>
+                <li>기획–백엔드–프론트엔드 필드 단위 100% 일치</li>
+              </ul>
+            </div>
+            <div class="pb-step-card">
+              <span class="pb-step-badge">STEP 02 · QUERY</span>
+              <h4>SQL 역추적 검증</h4>
+              <ul class="pb-keywords">
+                <li>DB 원천 테이블 조인(Join) 구조 직접 매핑</li>
+                <li>Null 허용 여부 및 데이터 누락·중복 사전 차단</li>
+                <li>실데이터 기반 엣지 케이스 쿼리 검증</li>
+              </ul>
+            </div>
+            <div class="pb-step-card">
+              <span class="pb-step-badge">STEP 03 · VERIFY</span>
+              <h4>Postman 페이로드 테스트</h4>
+              <ul class="pb-keywords">
+                <li>배포 전 API 응답 페이로드 및 Edge Case 사전 검증</li>
+                <li>프론트엔드 렌더링 SLA 응답속도 충족 확인</li>
+                <li>장애 원인(DB vs API vs UI) 분리 후 Jira 즉시 트래킹</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playbook Tab 2 -->
+        <div id="pb-panel-2" class="playbook-body hidden">
+          <div class="pb-title-row">
+            <h3>Scope 통제 &amp; 대안(Alternative) 의사결정</h3>
+            <span class="blueprint-tag">ZERO SCOPE CREEP</span>
+          </div>
+          <div class="pb-steps-grid">
+            <div class="pb-step-card">
+              <span class="pb-step-badge">STEP 01 · DIAGNOSE</span>
+              <h4>타당성 3축 진단</h4>
+              <ul class="pb-keywords">
+                <li>신규·변경 요구사항의 <strong>일정</strong> 임계경로 영향도 분석</li>
+                <li>기존 <strong>아키텍처</strong> 및 성능 SLA 부하 진단</li>
+                <li>투입 리소스 및 <strong>비용</strong> 대비 비즈니스 가치 평가</li>
+              </ul>
+            </div>
+            <div class="pb-step-card">
+              <span class="pb-step-badge">STEP 02 · REPORT</span>
+              <h4>서면 제약사항 리포트</h4>
+              <ul class="pb-keywords">
+                <li>단순 구두 거절 배제, 수용 불가 사유 정량화</li>
+                <li>기술적 병목 수치 및 벤치마크 레퍼런스 제시</li>
+                <li>이해관계자 간 객관적 의사결정 근거 확보</li>
+              </ul>
+            </div>
+            <div class="pb-step-card">
+              <span class="pb-step-badge">STEP 03 · RESOLVE</span>
+              <h4>1~2개 현실적 대안 제시</h4>
+              <ul class="pb-keywords">
+                <li>대안 A: 경량화·우회 구현을 통한 1차 MVP 우선 반영</li>
+                <li>대안 B: 고난도 확장 기능의 차기 로드맵 이관 합의</li>
+                <li>정시 론칭 100% 사수 및 후속 사업 파이프라인 연계</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playbook Tab 3 -->
+        <div id="pb-panel-3" class="playbook-body hidden">
+          <div class="pb-title-row">
+            <h3>Cross-Functional 의존성 &amp; 에스컬레이션</h3>
+            <span class="blueprint-tag">JIRA · CONFLUENCE · SLA</span>
+          </div>
+          <div class="pb-steps-grid">
+            <div class="pb-step-card">
+              <span class="pb-step-badge">STEP 01 · ALIGN</span>
+              <h4>도메인 용어집(Glossary) 단일화</h4>
+              <ul class="pb-keywords">
+                <li>개발·인프라·데이터·QA·비즈니스 공통 용어 정의</li>
+                <li>다국적·컨소시엄 조직 간 해석 오차 원천 제거</li>
+                <li>Confluence 단일 진실 공급원(SSOT) 문서화</li>
+              </ul>
+            </div>
+            <div class="pb-step-card">
+              <span class="pb-step-badge">STEP 02 · TRACK</span>
+              <h4>Jira/Confluence 의존성 매핑</h4>
+              <ul class="pb-keywords">
+                <li>팀 간 선행·후행 블로커(Blocker) 실시간 시각화</li>
+                <li>지연 징후 조기 포착 및 Mock API 병렬 개발 우회</li>
+                <li>이슈별 담당자(DRI) 및 완료 기한(DoD) 명확화</li>
+              </ul>
+            </div>
+            <div class="pb-step-card">
+              <span class="pb-step-badge">STEP 03 · ESCALATE</span>
+              <h4>임계치 초과 시 즉시 에스컬레이션</h4>
+              <ul class="pb-keywords">
+                <li>실무 선 해결 불가 이슈의 48시간 내 임계치 판정</li>
+                <li>영향도·해결 옵션 구조화 후 CTO·총괄 PM 즉시 상정</li>
+                <li>의사결정 리드타임 최소화 및 무결점 준공 달성</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Section 05: Education, Career Timeline & Continuous Growth -->
+    <section id="background">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">05 · EDUCATION, GROWTH &amp; CAREER</div>
+          <h2 class="section-title">학력 · 전문 교육 및 경력 요약</h2>
+        </div>
+      </div>
+
+      <div class="bg-grid">
+        <!-- Left Card: Education (Seoul National University Master's Highlighted) -->
+        <div class="info-card">
+          <h3>학력사항 (Education)</h3>
+          <div class="edu-list">
+            <div class="edu-item">
+              <div class="edu-top">
+                <span>서울대학교 법학일반대학원 지식재산권전공 <span class="highest-tag">최종학력</span></span>
+                <span class="edu-period">2018.09 ~ 2021.07</span>
+              </div>
+              <div class="edu-sub">석사 수료 · 기술 계약, 데이터·지재권(IP) 컴플라이언스 전문성</div>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-top">
+                <span>전북대학교 경제학전공</span>
+                <span class="edu-period">2007.08 ~ 2011.08</span>
+              </div>
+              <div class="edu-sub">학사 졸업 · 학점 3.87 / 4.5 (데이터 분석 및 비즈니스 경제 기반)</div>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-top">
+                <span>중국 현지 고등학교</span>
+                <span class="edu-period">현지 수학</span>
+              </div>
+              <div class="edu-sub">졸업 · 중국 현지 수학 기반 네이티브급 언어·문화 이해도</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Card: Professional Training & Growth -->
+        <div class="info-card">
+          <h3>전문 교육 &amp; 역량 고도화 (Professional Training &amp; Growth)</h3>
+          <div class="growth-list">
+            <div class="growth-item">
+              <strong>PMP (Project Management Professional) 자격 취득 준비 중</strong>
+              글로벌 표준 프로그램 거버넌스 및 대규모 리스크·의존성 관리 체계화
+            </div>
+            <div class="growth-item">
+              <strong>컴퓨터 공학 핵심 이론 심화 수학 중</strong>
+              자료구조 · 알고리즘 · 운영체제 · 네트워크 공학 역량 강화
+            </div>
+            <div class="growth-item">
+              <strong>아키텍처 &amp; 컨설팅 전문 과정 이수</strong>
+              MSA 구축 과정 · PM/PMO 양성과정 · ISP/ISMP 컨설팅 전문가 과정 수료
+            </div>
+            <div class="growth-item">
+              <strong>어학 및 글로벌 경력</strong>
+              중국어 네이티브급 (HSK 6급 263점) / 영어 비즈니스 소통 / 베이징 현지 근무 5년 6개월
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Compact Career Summary Strip -->
+      <div class="career-strip">
+        <div class="career-strip-title">Career Summary Strip · IT PM/PL 5년 3개월 · 글로벌/이커머스 8년 (총 13년 3개월)</div>
+        <div class="career-timeline-row">
+          <div class="career-step current">
+            <div class="c-date">2025.01 ~ 현재</div>
+            <div class="c-company">(주)이안</div>
+            <div class="c-role">차장 · 총괄 PM</div>
+          </div>
+          <div class="career-step">
+            <div class="c-date">2023.11 ~ 2024.12</div>
+            <div class="c-company">파미정보기술</div>
+            <div class="c-role">책임연구원/차장 · 개발 PL</div>
+          </div>
+          <div class="career-step">
+            <div class="c-date">2021.08 ~ 2023.10</div>
+            <div class="c-company">온품</div>
+            <div class="c-role">과장/팀장 · PM/PL</div>
+          </div>
+          <div class="career-step">
+            <div class="c-date">2018.11 ~ 2021.04</div>
+            <div class="c-company">(주)화텍파워</div>
+            <div class="c-role">과장 · 해외BD/M&amp;A</div>
+          </div>
+          <div class="career-step">
+            <div class="c-date">2012.09 ~ 2018.02</div>
+            <div class="c-company">IZP 그룹</div>
+            <div class="c-role">과장 · 이커머스</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 8. Footer & Direct Contact -->
+  <footer id="contact">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-title">김성철 · Technical Program Manager</div>
+        <div class="footer-meta">
+          <span>010-8861-9437</span>
+          <span>|</span>
+          <span>jcze-1987@naver.com</span>
+          <span>|</span>
+          <span>서울 관악구</span>
+        </div>
+      </div>
+
+      <div class="footer-actions no-print">
+        <button type="button" class="btn btn-primary" onclick="copyEmail()">Copy Email</button>
+        <button type="button" class="btn btn-outline" onclick="window.print()">PDF 인쇄 / 저장</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Pure Vanilla JavaScript (Zero External Libraries) -->
+  <script>
+    // 1. Switch Architecture Blueprint Tabs (Phase 1 vs Phase 2)
+    function switchArch(phase) {
+      var p1 = document.getElementById('arch-tab-p1');
+      var p2 = document.getElementById('arch-tab-p2');
+      var b1 = document.getElementById('btn-arch-p1');
+      var b2 = document.getElementById('btn-arch-p2');
+
+      if (phase === 'p1') {
+        p1.classList.remove('hidden');
+        p2.classList.add('hidden');
+        b1.classList.add('active');
+        b2.classList.remove('active');
+      } else {
+        p1.classList.add('hidden');
+        p2.classList.remove('hidden');
+        b2.classList.add('active');
+        b1.classList.remove('active');
+      }
+    }
+
+    // 2. Filter Project Cards by Category
+    function filterProjects(category) {
+      var cards = document.querySelectorAll('.project-card');
+      var buttons = document.querySelectorAll('.filter-pill');
+
+      for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].getAttribute('data-cat') === category) {
+          buttons[i].classList.add('active');
+        } else {
+          buttons[i].classList.remove('active');
+        }
+      }
+
+      for (var j = 0; j < cards.length; j++) {
+        var cats = cards[j].getAttribute('data-categories');
+        if (category === 'all' || cats.indexOf(category) !== -1) {
+          cards[j].classList.remove('hidden');
+        } else {
+          cards[j].classList.add('hidden');
+        }
+      }
+    }
+
+    // 3. Switch TPM Playbook Tabs
+    function switchPlaybook(index) {
+      for (var i = 1; i <= 3; i++) {
+        var panel = document.getElementById('pb-panel-' + i);
+        var btn = document.getElementById('pb-btn-' + i);
+        if (i === index) {
+          panel.classList.remove('hidden');
+          btn.classList.add('active');
+        } else {
+          panel.classList.add('hidden');
+          btn.classList.remove('active');
+        }
+      }
+    }
+
+    // 4. Copy Email with Toast Feedback (iFrame/Offline Safe)
+    var toastTimeout;
+    function copyEmail() {
+      var email = 'jcze-1987@naver.com';
+      var tempInput = document.createElement('input');
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      var toast = document.getElementById('toast');
+      var toastText = document.getElementById('toast-text');
+      toastText.textContent = '이메일(' + email + ')이 클립보드에 복사되었습니다.';
+      toast.classList.add('show');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(function () {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+  </script>
+</body>
+</html>
